@@ -4,7 +4,7 @@
   <p align="center">
     This is my homework, which is using django framework (python)
     <br />
-    <a href="https://github.com/YtseyJam/Django_HW_NewsPortal/tree/main/DraftNews"><strong>Explore the code »</strong></a>
+    <a href="https://github.com/YtseyJam/Django_HW_NewsPortal/tree/master/DraftNews"><strong>Explore the code »</strong></a>
     <br />
     <br />
 
