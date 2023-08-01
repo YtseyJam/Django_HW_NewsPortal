@@ -1,0 +1,54 @@
+<!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+
+<!-- Название у нас будет Product -->
+{% block title %}
+📄{{ exactly_news.post_title|censor }}
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
+{% block content %}
+
+               <h1 style="text-align: center;">{{ exactly_news.post_title|censor }}</h1>
+    <hr />
+
+               <h6>{{ exactly_news.post_body|censor}}</h6>
+    <hr />
+<strong>Автор: </strong>{{ exactly_news.author.user }} <strong>
+    🕗</strong>{{ exactly_news.post_datetime|date:'d M Y'}} {{ exactly_news.post_datetime|time}}
+    <p></p>
+<strong>Тема</strong>
+    {% for cat in exactly_news.categories.all %}
+                        <a href="{% url 'category_list' cat.id %}">{{ cat.category }}</a>
+
+
+    {% endfor %}
+    <p></p>
+
+    {% if perms.newsportal.change_post %}
+                        {% if exactly_news.post_type == "NEWS" %}
+                            <button>
+                            <a href="{% url 'news_update' pk=exactly_news.pk %}">Изменить</a>
+                            </button>
+                        {% elif exactly_news.post_type == "ARTL" %}
+                            <button>
+                            <a href="{% url 'artl_update' pk=exactly_news.pk %}">Изменить</a>
+                            </button>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if perms.newsportal.delete_post %}
+                    {% if exactly_news.post_type == "NEWS" %}
+                            <button>
+                            <a href="{% url 'news_delete' pk=exactly_news.pk %}">Удалить</a>
+                            </button>
+                        {% elif exactly_news.post_type == "ARTL" %}
+                        <button>
+                            <a href="{% url 'artl_delete' pk=exactly_news.pk %}">Удалить</a>
+                        </button>
+                        {% endif %}
+                    {% endif %}
+
+
+{% endblock content %}

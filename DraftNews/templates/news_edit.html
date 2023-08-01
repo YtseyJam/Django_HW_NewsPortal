@@ -1,0 +1,32 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+✍Edit
+{% endblock title %}
+
+{% block content %}
+
+
+
+<h1 style="text-align: center;">Редактирование записи</h1>
+<hr>
+
+<table style="margin-left: auto; margin-right: auto;">
+        <tr>
+            <td><form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+                <td>
+                    <input type="submit" value="Save" />
+                </td>
+            </tr>
+    </table>
+</form>
+
+            </td>
+        </tr>
+    </table>
+
+{% endblock content %}

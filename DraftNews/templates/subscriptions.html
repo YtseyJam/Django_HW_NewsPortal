@@ -1,0 +1,25 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Subscriptions
+{% endblock title %}
+
+{% block content %}
+    {% for new in news  %}
+        <p>
+            {{ new.post_type }}
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="post_type" value="{{ post_type.id }}" />
+
+                {% if news.user_subscribed %}
+                    <button disabled>Подписаться</button>
+                    <button name="action" value="unsubscribe">Отписаться</button>
+                {% else %}
+                    <button name="action" value="subscribe">Подписаться</button>
+                    <button disabled>Отписаться</button>
+                {% endif %}
+            </form>
+        </p>
+    {% endfor %}
+{% endblock content %}
