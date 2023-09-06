@@ -2,21 +2,21 @@
 {% load custom_filters %}
 {% load custom_tags %}
 {% load custom_extras %}
-
+{% load i18n %}
 
 {% block title %}
-🔥All Posts
+🔥{% trans "All Posts" %}
 {% endblock title %}
 
 
 {% block content %}
-   <h1 style="text-align: center;">Все новости и статьи</h1>
-    <p style="text-align: center;">Количество постов: {{ news|length }}</p>
+   <h1 style="text-align: center;">{% trans "All news and articles" %}</h1>
+    <p style="text-align: center;">{% trans "Amount" %}: {{ news|length }}</p>
 
 {% if not is_author %}
 <button>
     <a class="nav-link" href="{% url 'account_upgrade' %}">
-        <h4><strong>Join the authors!</strong></h4>
+        <h4><strong>{% trans "Join the authors!" %}</strong></h4>
     </a>
 </button>
 {% endif %}
@@ -29,12 +29,12 @@
 
            {% for news in news %}
 
-               <p><strong>Название: </strong><a href="{% url 'exactly_news' news.id %}">{{ news.post_title|censor }}</a></p>
+               <p><strong>{% trans "Title" %}: </strong><a href="{% url 'exactly_news' news.id %}">{{ news.post_title|censor }}</a></p>
 
-               <p><strong>Содержание: </strong>{{ news.post_body|truncatechars:240|censor }}</p>
-               <strong>Автор: </strong>{{ news.author.user }}
+               <p><strong>{% trans "Content" %}: </strong>{{ news.post_body|truncatechars:240|censor }}</p>
+               <strong>{% trans "Author" %}: </strong>{{ news.author.user }}
                <strong>🕗</strong>{{ news.post_datetime|date:'d M' }}
-            <strong>Тема</strong>
+            <strong>{% trans "Topic" %}</strong>
     {% for cat in news.categories.all %}
                         <a href="{% url 'category_list' cat.id %}">{{ cat.category }}</a>
 
@@ -52,11 +52,11 @@
                     {% if perms.newsportal.change_post %}
                         {% if news.post_type == "NEWS" %}
                             <button>
-                            <a href="{% url 'news_update' pk=news.pk %}">Изменить</a>
+                            <a href="{% url 'news_update' pk=news.pk %}">{% trans "Edit" %}</a>
                             </button>
                         {% elif news.post_type == "ARTL" %}
                             <button>
-                            <a href="{% url 'artl_update' pk=news.pk %}">Изменить</a>
+                            <a href="{% url 'artl_update' pk=news.pk %}">{% trans "Edit" %}</a>
                             </button>
                         {% endif %}
                     {% endif %}
@@ -64,11 +64,11 @@
                     {% if perms.newsportal.delete_post %}
                     {% if news.post_type == "NEWS" %}
                             <button>
-                            <a href="{% url 'news_delete' pk=news.pk %}">Удалить</a>
+                            <a href="{% url 'news_delete' pk=news.pk %}">{% trans "Delete" %}</a>
                             </button>
                         {% elif news.post_type == "ARTL" %}
                         <button>
-                            <a href="{% url 'artl_delete' pk=news.pk %}">Удалить</a>
+                            <a href="{% url 'artl_delete' pk=news.pk %}">{% trans "Delete" %}</a>
                         </button>
                         {% endif %}
                     {% endif %}
@@ -78,9 +78,9 @@
            {% endfor %}
 
 <p style="text-align: center;">
-<br> <strong><a href="{% url 'news_search' %}">👀Поиск</a> </strong><br>
+<br> <strong><a href="{% url 'news_search' %}">👀{% trans "Search" %}</a> </strong><br>
    {% else %}
-       <h2>Постов нет!</h2>
+       <h2>{% trans "No posts!" %}</h2>
    {% endif %}
 </p>
 {# Добавляем пагинацию на страницу #}

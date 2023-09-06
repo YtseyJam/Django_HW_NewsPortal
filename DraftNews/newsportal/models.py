@@ -5,6 +5,8 @@ from django.urls import reverse
 
 from django.core.cache import cache
 
+from django.utils.translation import gettext as _
+from django.utils.translation import pgettext_lazy # импортируем «ленивый» геттекст с подсказкой
 
 class Author(models.Model):
 
@@ -77,7 +79,7 @@ class Post(models.Model):
     author = models.ForeignKey(Author, on_delete = models.CASCADE)
     post_type = models.CharField(max_length=4, choices=TYPES) #news or article
     post_datetime = models.DateTimeField(auto_now_add = True)
-    post_title = models.CharField(max_length=64)
+    post_title = models.CharField(max_length=64, help_text=_('title of the post'))
     post_body = models.TextField()
     post_rating = models.IntegerField(default=0) #default = 0.0 ?
     categories = models.ManyToManyField(Category, through = "PostCategory")

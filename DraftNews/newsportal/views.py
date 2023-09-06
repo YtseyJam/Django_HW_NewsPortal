@@ -22,7 +22,7 @@ from django.views import View
 from .tasks import hello
 
 from django.core.cache import cache #кэш
-
+from django.utils.translation import gettext as _ # импортируем функцию для перевода
 import logging
 
 logger = logging.getLogger(__name__)
@@ -186,3 +186,15 @@ class IndexView(View):
     def get(self, request):
         hello.delay()
         return HttpResponse('Hello!')
+
+
+class Index(View):
+    def get(self, request):
+        # . Translators: This message appears on the home page only
+        models = Post.objects.all()
+
+        context = {
+            'models': models,
+        }
+
+        return HttpResponse(render(request, 'all_news.html', context))
