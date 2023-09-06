@@ -44,8 +44,13 @@
 
 Latest updates:
 
+*03/09/2023:
 
-*23/07/23:
+Добавлено логгирование в [settings.py](https://github.com/YtseyJam/Django_HW_NewsPortal/blob/master/DraftNews/DraftNews/settings.py)
+
+
+
+*23/07/2023:
 
 
 Добавлена поддержка БД Redis и библиотеки Celery для асинхронного взаимодействия.
