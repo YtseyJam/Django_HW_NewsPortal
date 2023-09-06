@@ -248,19 +248,19 @@ LOGGING = {
     "handlers": {
         "console": {
             "level": "DEBUG",
-            #"filters": ["require_debug_true"],
+            "filters": ["require_debug_true"],
             "class": "logging.StreamHandler",
             "formatter": "console_format",
         },
         "mail_admins": {
             "level": "ERROR",
-            #"filters": ["require_debug_false"],
+            "filters": ["require_debug_false"],
             "class": "django.utils.log.AdminEmailHandler",
             "formatter": "warning_format",
         },
         "general": {
             "level": "INFO",
-            #"filters": ["require_debug_false"],
+            "filters": ["require_debug_false"],
             "class": "logging.FileHandler",
             "filename": "general.log",
             "formatter": "info_and_security_format",
@@ -272,7 +272,7 @@ LOGGING = {
             "formatter": "error_format",
         },
         "security": {
-            #"filters": ["require_debug_false"],
+            "filters": ["require_debug_false"],
             "class": "logging.FileHandler",
             "filename": "security.log",
             "formatter": "info_and_security_format",
